@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="definitions_11756265-f371-4240-a8a2-8cec90b22a64" targetNamespace="http://it.univaq.disim/mrs/unified" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+  <collaboration id="Collaboration_Global_MRS">
+    <participant id="Pool_Drone" name="Drone"/>
+    <participant id="Pool_Tagliatore" name="Tagliatore"/>
+    <participant id="Pool_Scavatore" name="Scavatore"/>
+    <participant id="Pool_Seminatore" name="Seminatore"/>
+    <participant id="Pool_Broadcast" name="Broadcast"/>
+  </collaboration>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_bf0ede5e-071d-4778-85d3-ec238e699269">
+    <bpmndi:BPMNPlane bpmnElement="Collaboration_Global_MRS" id="BPMNPlane_ee0c1e2d-f01d-4242-a0f7-fcd02472e042">
+      <bpmndi:BPMNShape bpmnElement="Pool_Drone" id="Pool_Drone_di">
+        <dc:Bounds height="150.0" width="600.0" x="100.0" y="100.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Pool_Tagliatore" id="Pool_Tagliatore_di">
+        <dc:Bounds height="150.0" width="600.0" x="100.0" y="300.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Pool_Scavatore" id="Pool_Scavatore_di">
+        <dc:Bounds height="150.0" width="600.0" x="100.0" y="500.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Pool_Seminatore" id="Pool_Seminatore_di">
+        <dc:Bounds height="150.0" width="600.0" x="100.0" y="700.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Pool_Broadcast" id="Pool_Broadcast_di">
+        <dc:Bounds height="150.0" width="600.0" x="100.0" y="900.0"/>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

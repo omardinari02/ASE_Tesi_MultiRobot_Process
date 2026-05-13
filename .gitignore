@@ -1,0 +1,6 @@
+.env
+node_modules/
+*.log
+config/settings.local.php
+.DS_Store
+target/

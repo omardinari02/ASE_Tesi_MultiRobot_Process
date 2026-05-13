@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" exporter="Camunda Modeler" exporterVersion="5.0.0" expressionLanguage="http://www.w3.org/1999/XPath" id="Def_Digger" targetNamespace="http://it.univaq.disim/digger" typeLanguage="http://www.w3.org/2001/XMLSchema">
+    
+  <bpmn:process id="Scavatore" isClosed="false" isExecutable="true" name="Digger Basic Process" processType="None">
+        
+    <bpmn:startEvent id="Start_S" isInterrupting="true" name="Inizio" parallelMultiple="false">
+            
+      <bpmn:outgoing>f1</bpmn:outgoing>
+          
+    </bpmn:startEvent>
+        
+    <bpmn:serviceTask camunda:class="it.univaq.disim.digger.PositioningDelegate" completionQuantity="1" id="Task_Posizionamento" implementation="##WebService" isForCompensation="false" name="Posizionamento" startQuantity="1">
+            
+      <bpmn:extensionElements>
+                
+        <camunda:inputParameter name="requiredData">MapData</camunda:inputParameter>
+              
+      </bpmn:extensionElements>
+            
+      <bpmn:incoming>f1</bpmn:incoming>
+            
+      <bpmn:outgoing>f2</bpmn:outgoing>
+          
+    </bpmn:serviceTask>
+        
+    <bpmn:serviceTask camunda:class="it.univaq.disim.digger.DiggingDelegate" completionQuantity="1" id="Task_Scavo" implementation="##WebService" isForCompensation="false" name="Scava buche" startQuantity="1">
+            
+      <bpmn:extensionElements>
+                
+        <camunda:inputParameter name="requiredData">Boolean</camunda:inputParameter>
+                
+        <camunda:outputParameter name="producedData">Boolean</camunda:outputParameter>
+              
+      </bpmn:extensionElements>
+            
+      <bpmn:incoming>f2</bpmn:incoming>
+            
+      <bpmn:outgoing>f3</bpmn:outgoing>
+          
+    </bpmn:serviceTask>
+        
+    <bpmn:endEvent id="End_S" name="Fine">
+            
+      <bpmn:incoming>f3</bpmn:incoming>
+          
+    </bpmn:endEvent>
+        
+    <bpmn:sequenceFlow id="f1" sourceRef="Start_S" targetRef="Task_Posizionamento"/>
+        
+    <bpmn:sequenceFlow id="f2" sourceRef="Task_Posizionamento" targetRef="Task_Scavo"/>
+        
+    <bpmn:sequenceFlow id="f3" sourceRef="Task_Scavo" targetRef="End_S"/>
+      
+  </bpmn:process>
+    
+  <bpmndi:BPMNDiagram id="D1">
+        
+    <bpmndi:BPMNPlane bpmnElement="Scavatore" id="P1">
+            
+      <bpmndi:BPMNShape bpmnElement="Start_S" id="S_Start_di">
+                
+        <dc:Bounds height="36" width="36" x="152" y="122"/>
+                
+        <bpmndi:BPMNLabel>
+                    
+          <dc:Bounds height="14" width="26" x="157" y="165"/>
+                  
+        </bpmndi:BPMNLabel>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="Task_Posizionamento" id="S1">
+                
+        <dc:Bounds height="80" width="100" x="250" y="100"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="Task_Scavo" id="S2">
+                
+        <dc:Bounds height="80" width="100" x="420" y="100"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="End_S" id="S_End_di">
+                
+        <dc:Bounds height="36" width="36" x="592" y="122"/>
+                
+        <bpmndi:BPMNLabel>
+                    
+          <dc:Bounds height="14" width="20" x="600" y="165"/>
+                  
+        </bpmndi:BPMNLabel>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="f1" id="f1_di">
+                
+        <di:waypoint x="188" y="140"/>
+                
+        <di:waypoint x="250" y="140"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="f2" id="f2_di">
+                
+        <di:waypoint x="350" y="140"/>
+                
+        <di:waypoint x="420" y="140"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="f3" id="f3_di">
+                
+        <di:waypoint x="520" y="140"/>
+                
+        <di:waypoint x="592" y="140"/>
+              
+      </bpmndi:BPMNEdge>
+          
+    </bpmndi:BPMNPlane>
+      
+  </bpmndi:BPMNDiagram>
+  
+</bpmn:definitions>

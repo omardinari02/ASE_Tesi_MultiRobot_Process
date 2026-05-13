@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Def_Coreografia" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:choreography id="Choreography_Globale">
+    <bpmn:participant id="Part_Drone" name="Drone" />
+    <bpmn:participant id="Part_Tagliatore" name="Tagliatore" />
+    <bpmn:participant id="Part_Scavatore" name="Scavatore" />
+    <bpmn:participant id="Part_Seminatore" name="Seminatore" />
+    <bpmn:participant id="Part_Broadcast" name="Broadcast" />
+
+    <bpmn:choreographyTask id="ChoreoTask_1" name="Invia posizione erbacce" initiatingParticipantRef="Part_Drone">
+      <bpmn:participantRef>Part_Drone</bpmn:participantRef>
+      <bpmn:participantRef>Part_Tagliatore</bpmn:participantRef>
+      <bpmn:messageFlowRef>MessageFlow_weedPosition</bpmn:messageFlowRef>
+    </bpmn:choreographyTask>
+
+    <bpmn:choreographyTask id="ChoreoTask_2" name="Invia disponibilità" initiatingParticipantRef="Part_Tagliatore">
+      <bpmn:participantRef>Part_Tagliatore</bpmn:participantRef>
+      <bpmn:participantRef>Part_Drone</bpmn:participantRef>
+      <bpmn:messageFlowRef>MessageFlow_availability</bpmn:messageFlowRef>
+    </bpmn:choreographyTask>
+
+    <bpmn:parallelGateway id="Gateway_Sync_Disp" name="Raccolta di tutte le disponibilità" />
+
+    <bpmn:exclusiveGateway id="Gateway_Tagliatore_Disp" name="Tagliatore disponibile?" />
+
+    <bpmn:intermediateCatchEvent id="Event_Timer" name="Attesa 10 secondi">
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDuration>PT10S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+
+    <bpmn:choreographyTask id="ChoreoTask_3" name="Notifica trattore più vicino" initiatingParticipantRef="Part_Drone">
+      <bpmn:participantRef>Part_Drone</bpmn:participantRef>
+      <bpmn:participantRef>Part_Tagliatore</bpmn:participantRef>
+      <bpmn:messageFlowRef>MessageFlow_closestTractor</bpmn:messageFlowRef>
+    </bpmn:choreographyTask>
+
+    <bpmn:choreographyTask id="ChoreoTask_4" name="Segnale terreno pronto" initiatingParticipantRef="Part_Tagliatore">
+      <bpmn:participantRef>Part_Tagliatore</bpmn:participantRef>
+      <bpmn:participantRef>Part_Scavatore</bpmn:participantRef>
+      <bpmn:messageFlowRef>MessageFlow_fieldReady</bpmn:messageFlowRef>
+    </bpmn:choreographyTask>
+
+    <bpmn:choreographyTask id="ChoreoTask_5" name="Scavo completato" initiatingParticipantRef="Part_Scavatore">
+      <bpmn:participantRef>Part_Scavatore</bpmn:participantRef>
+      <bpmn:participantRef>Part_Seminatore</bpmn:participantRef>
+      <bpmn:messageFlowRef>MessageFlow_digDone</bpmn:messageFlowRef>
+    </bpmn:choreographyTask>
+
+    <bpmn:choreographyTask id="ChoreoTask_6" name="Segnale missione completata" initiatingParticipantRef="Part_Seminatore">
+      <bpmn:participantRef>Part_Seminatore</bpmn:participantRef>
+      <bpmn:participantRef>Part_Broadcast</bpmn:participantRef>
+      <bpmn:messageFlowRef>MessageFlow_seedingDone</bpmn:messageFlowRef>
+    </bpmn:choreographyTask>
+
+  </bpmn:choreography>
+</bpmn:definitions>
